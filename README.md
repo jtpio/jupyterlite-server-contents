@@ -1,4 +1,4 @@
-# jupyterlite_server_contents
+# jupyterlite-server-contents
 
 [![Github Actions Status](https://github.com/jtpio/jupyterlite-server-contents/workflows/Build/badge.svg)](https://github.com/jtpio/jupyterlite-server-contents/actions/workflows/build.yml)
 
