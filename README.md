@@ -26,9 +26,7 @@ In your JupyterLite deployment, add the configuration to `jupyter-lite.json`:
   "jupyter-config-data": {
     "serverContentsBaseUrl": "http://localhost:8888/",
     "serverContentsToken": "my-token",
-    "disabledExtensions": [
-      "@jupyterlite/services-extension:default-drive"
-    ]
+    "disabledExtensions": ["@jupyterlite/services-extension:default-drive"]
   }
 }
 ```
