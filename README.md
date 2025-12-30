@@ -2,9 +2,9 @@
 
 [![Github Actions Status](https://github.com/jtpio/jupyterlite-server-contents/workflows/Build/badge.svg)](https://github.com/jtpio/jupyterlite-server-contents/actions/workflows/build.yml)
 
-Access server contents from JupyterLite.
-
 This extension replaces JupyterLite's default in-browser storage with a remote Jupyter server's contents API, allowing JupyterLite to read and write files on a real Jupyter server.
+
+![a screenshot of the extension](./screenshot.png)
 
 ## Requirements
 
