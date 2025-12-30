@@ -1,0 +1,17 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v4.5.1
+_src_path: https://github.com/jupyterlab/extension-template
+author_email: ''
+author_name: Jeremy Tuloup
+create_claude_symlink: true
+create_gemini_symlink: false
+has_ai_rules: true
+has_binder: false
+has_settings: true
+kind: frontend
+labextension_name: jupyterlite-server-contents
+project_short_description: Access server contents from JupyterLite
+python_name: jupyterlite_server_contents
+repository: https://github.com/jtpio/jupyterlite-server-contents
+test: false
+
