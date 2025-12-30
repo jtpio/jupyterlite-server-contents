@@ -1,8 +1,0 @@
-{
-  "jupyter.lab.shortcuts": [],
-  "title": "jupyterlite-server-contents",
-  "description": "jupyterlite-server-contents settings.",
-  "type": "object",
-  "properties": {},
-  "additionalProperties": false
-}

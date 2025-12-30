@@ -1,31 +1,41 @@
+import { PageConfig } from '@jupyterlab/coreutils';
 import {
-  JupyterFrontEnd,
-  JupyterFrontEndPlugin
-} from '@jupyterlab/application';
-
-import { ISettingRegistry } from '@jupyterlab/settingregistry';
+  Contents,
+  Drive,
+  IDefaultDrive,
+  ServerConnection,
+  ServiceManagerPlugin
+} from '@jupyterlab/services';
 
 /**
- * Initialization data for the jupyterlite-server-contents extension.
+ * The plugin ID for the server contents extension.
  */
-const plugin: JupyterFrontEndPlugin<void> = {
-  id: 'jupyterlite-server-contents:plugin',
-  description: 'Access server contents from JupyterLite',
-  autoStart: true,
-  optional: [ISettingRegistry],
-  activate: (app: JupyterFrontEnd, settingRegistry: ISettingRegistry | null) => {
-    console.log('JupyterLab extension jupyterlite-server-contents is activated!');
+const PLUGIN_ID = 'jupyterlite-server-contents:plugin';
 
-    if (settingRegistry) {
-      settingRegistry
-        .load(plugin.id)
-        .then(settings => {
-          console.log('jupyterlite-server-contents settings loaded:', settings.composite);
-        })
-        .catch(reason => {
-          console.error('Failed to load settings for jupyterlite-server-contents.', reason);
-        });
-    }
+/**
+ * The default drive plugin that connects to a remote Jupyter server.
+ *
+ * This plugin replaces the JupyterLite default drive with one that
+ * connects to a remote Jupyter server specified via PageConfig options.
+ */
+const plugin: ServiceManagerPlugin<Contents.IDrive> = {
+  id: PLUGIN_ID,
+  description:
+    'Provides a default drive that connects to a remote Jupyter server',
+  provides: IDefaultDrive,
+  activate: (): Contents.IDrive => {
+    // Read configuration from PageConfig
+    const baseUrl = PageConfig.getOption('serverContentsBaseUrl');
+    const token = PageConfig.getOption('serverContentsToken');
+
+    // Create custom server settings for the remote server
+    const serverSettings = ServerConnection.makeSettings({
+      baseUrl,
+      token
+    });
+
+    // Create and return the drive pointing to the remote server
+    return new Drive({ serverSettings });
   }
 };
 

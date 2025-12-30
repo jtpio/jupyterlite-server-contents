@@ -2,11 +2,67 @@
 
 [![Github Actions Status](https://github.com/jtpio/jupyterlite-server-contents/workflows/Build/badge.svg)](https://github.com/jtpio/jupyterlite-server-contents/actions/workflows/build.yml)
 
-Access server contents from JupyterLite
+Access server contents from JupyterLite.
+
+This extension replaces JupyterLite's default in-browser storage with a remote Jupyter server's contents API, allowing JupyterLite to read and write files on a real Jupyter server.
 
 ## Requirements
 
 - JupyterLab >= 4.0.0
+
+## Configuration
+
+This extension reads configuration from JupyterLite's PageConfig. Set the following options to connect to a remote Jupyter server:
+
+- `serverContentsBaseUrl`: The base URL of the remote Jupyter server (e.g., `http://localhost:8888/`)
+- `serverContentsToken`: The authentication token for the remote server
+
+### Example Configuration
+
+In your JupyterLite deployment, add the configuration to `jupyter-lite.json`:
+
+```json
+{
+  "jupyter-config-data": {
+    "serverContentsBaseUrl": "http://localhost:8888/",
+    "serverContentsToken": "my-token",
+    "disabledExtensions": [
+      "@jupyterlite/services-extension:default-drive"
+    ]
+  }
+}
+```
+
+## Running Locally
+
+### 1. Install development dependencies
+
+```bash
+pip install -e ".[dev]"
+```
+
+### 2. Start a Jupyter server
+
+In a separate terminal, start a Jupyter server that will serve the contents:
+
+```bash
+jupyter server --ServerApp.token=my-token --ServerApp.allow_origin='*'
+```
+
+Note: The `--ServerApp.allow_origin='*'` flag is required to allow cross-origin requests from JupyterLite.
+
+### 3. Build JupyterLite
+
+A `jupyter-lite.json` configuration file is included in this repo. Then build and serve JupyterLite:
+
+```bash
+jupyter lite build
+jupyter lite serve
+```
+
+### 4. Access JupyterLite
+
+Open your browser to the URL shown by `jupyter lite serve` (typically `http://localhost:8000`). The default file browser will show files from the remote Jupyter server.
 
 ## Install
 
